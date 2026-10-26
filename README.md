@@ -2,8 +2,6 @@
 
 A Spring Boot banking web application with account management, deposits, withdrawals, transfers, transaction history, and an admin console.
 
-Request flows inward: Controller receives HTTP, binds/validates DTO (form data), calls Service (business logic/transactions), which uses Repository (DB access) on Domain entities. Repository returns Domain; Service maps to DTO/view; Controller renders Thymeleaf. Dependencies point inward: Controller → Service → Repository → Domain; DTOs sit at the web boundary for input/output shaping.
-
 ## Stack (latest)
 
 | Component | Version |
