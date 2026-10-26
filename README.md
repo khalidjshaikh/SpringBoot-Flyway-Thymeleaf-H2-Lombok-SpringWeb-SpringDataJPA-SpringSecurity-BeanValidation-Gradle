@@ -2,6 +2,8 @@
 
 A Spring Boot banking web application with account management, deposits, withdrawals, transfers, transaction history, and an admin console.
 
+Request flows inward: Controller receives HTTP, binds/validates DTO (form data), calls Service (business logic/transactions), which uses Repository (DB access) on Domain entities. Repository returns Domain; Service maps to DTO/view; Controller renders Thymeleaf. Dependencies point inward: Controller → Service → Repository → Domain; DTOs sit at the web boundary for input/output shaping.
+
 ## Stack (latest)
 
 | Component | Version |
@@ -46,8 +48,8 @@ A Spring Boot banking web application with account management, deposits, withdra
 ./run.sh
 ```
 
-- App: http://localhost:8080
-- H2 console: http://localhost:8080/h2-console
+- App: http://[::1]:8080
+- H2 console: http://[::1]:8080/h2-console
   - JDBC URL: `jdbc:h2:mem:bankingdb`
   - User: `sa` (no password)
 
@@ -69,6 +71,10 @@ A Spring Boot banking web application with account management, deposits, withdra
 ```sh
 ./gradlew test
 ```
+
+## Architecture
+
+Request flows inward: Controller receives HTTP, binds/validates DTO (form data), calls Service (business logic/transactions), which uses Repository (DB access) on Domain entities. Repository returns Domain; Service maps to DTO/view; Controller renders Thymeleaf. Dependencies point inward: Controller → Service → Repository → Domain; DTOs sit at the web boundary for input/output shaping.
 
 ## Project structure
 
