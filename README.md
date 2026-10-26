@@ -70,6 +70,16 @@ A Spring Boot banking web application with account management, deposits, withdra
 ./gradlew test
 ```
 
+## Database schema
+
+Flyway migration: `src/main/resources/db/migration/V1__create_schema.sql`
+
+- `users`: id, username (unique), password, email (unique), full_name, role, enabled, created_at
+- `bank_accounts`: id, account_number (unique), user_id (FK), account_type, balance (DECIMAL 19,2), currency, status, created_at
+- `transactions`: id, account_id (FK), type, amount (DECIMAL 19,2), balance_after (DECIMAL 19,2), description, reference_number (unique), related_account_id (FK), status, created_at
+
+Indexes: `idx_accounts_user`, `idx_txn_account`, `idx_txn_created`.
+
 ## Architecture
 
 Request flows inward: Controller receives HTTP, binds/validates DTO (form data), calls Service (business logic/transactions), which uses Repository (DB access) on Domain entities. Repository returns Domain; Service maps to DTO/view; Controller renders Thymeleaf. Dependencies point inward: Controller → Service → Repository → Domain; DTOs sit at the web boundary for input/output shaping.
